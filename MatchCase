@@ -1,0 +1,17 @@
+# Here we would learn Match Case Statements available for python 3.10 onwards
+# for example when we take input and use It with Match-Case Statement it will compare that input value with every case and exexute
+# when a Particular Case Matches with input.
+# it is just like if-else Statements when a case matches the ladder stops and statement under it executes.
+# Basic Example
+x=int(input("Enter marks Obtained Out of 100: "))
+match x:
+    case _ if x<33:
+            print("Sorry u Failed")  # _ accepts any Value entered Unless that value matches with a previous case
+    case _ if x>=33 and x<50:
+            print("C Grade!!")
+    case _ if x>=50 and x<70:
+            print("B Grade!!")
+    case _ if x>=70 and x<90:
+            print(" A Grade !!")
+    case _ if x>=90:
+            print("A+ Grade!!")
