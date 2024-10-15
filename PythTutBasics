@@ -1,7 +1,10 @@
 # This File Will Be Containing all the Basic syntax of Python And also commands and Useful Built in functions one need to Remember Will creating Program.
+
 a=BlackBox
 # to print Box in this case String slicing can be used in 2 ways.
 print(a[5:8]) or print(a[-1:-4])
 #here counting starts from 0 and the Opening index is included like 5 while closing index like 8 is not included
 
-#
+print("Hello my Name is\'john\')
+#this will print 'john' separately
+
