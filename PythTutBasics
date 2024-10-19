@@ -10,7 +10,7 @@ print("Hello my Name is\'john\')
 
 # String Methods
 str1= i have no enemies, in fact no one has any!!!!.
-print(str1.upper())  #converts string t uppercase and vice versa with lower()
+print(str1.upper())  #converts string to uppercase and vice versa with lower()
 print(str1.rstrip("!"))   # Remove the trailing !!!! from str1
 print(str1.split())  # splits the string and return list of characters.
 print(str1.capitalize())    # capitalize first character of every word
@@ -19,6 +19,23 @@ print(str1.endswith("!")) #checks whether string ends with particular character 
 print(str1.title())  # converts first character of each word to Uppercase.
 print(str1.swapcase())  # Converts lowercase letters into uppercase and vice versa
 print(str1.index("n"))  # returns index of first occurring n same with find()
-# some other Methods like isalnum() islower() Are used to check String and return true or false.
+# some other Methods like isalnum() checks string to be alphanumeric and return true or false.
+# islower() is used to check String is in lowercase or not and return true or false.
+
+#List Methods
+#<list_name>.append() used to add element to list
+#<list_name>count() Used to count no. of Occurences of a Particular element inside ()
+#<list_name>.max() Calculate max of all the elements and return it.
+#<list_name>.min() Calculate min of all the elements and return it.
+#<list_name.sort() sorts the list in ascending,descending order
+#<list_name.index() Returns the index of value or element inside it if not present returns -1
+#<list_name.pop() remove and returns the last element if index not given element else if given inside (0) then returns element on that index
 
 
+str1= "Daijo wu desu yo Datte Kimi {}"
+a="Yowai Mo!!"
+print(str1.format(a))
+#format() funx. adds value of 'a' to str1 at {}
+print(f"Daijo wu desu yo Datte Kimi {a} ")
+# f string Allows Variable to be readed separately within Quotes and can also converts int to str.
+ 
