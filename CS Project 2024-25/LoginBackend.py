@@ -1,40 +1,27 @@
 import mysql.connector as c
-
-# Establishing the connection
-myconn = c.connect(host="localhost", user="root", password="1234", database="Bnk_Mgmt")
+myconn = c.connect(host="localhost", user="root", password="1234", database="Userlogin_sys")
 mycur = myconn.cursor()
 
-# Create Accounts table
-query = '''
-CREATE TABLE IF NOT EXISTS Accounts (
-    uid INT PRIMARY KEY,
-    name VARCHAR(30),
-    password INT,
-    balance INT
-)
-'''
-mycur.execute(query)
-
 # Function to create a new account
-def create_acc():
-    uid = int(input("Enter Unique ID assigned: "))
-    mycur.execute("SELECT * FROM Accounts WHERE uid=%s", (uid,))
+def Register_acc():
+    uID = int(input("Enter Unique ID assigned: "))
+    mycur.execute("SELECT * FROM Accounts WHERE uID=%s", (uID,))
     account = mycur.fetchone()
     
     if account is None:
         name = input("Enter Your Name: ")
         password = int(input("Create Password: "))
-        balance = int(input("Enter Initial Balance: "))
+        email = int(input("Enter Your Email ID: "))
         
-        sql = "INSERT INTO Accounts (uid, name, password, balance) VALUES (%s, %s, %s, %s)"
-        val = (uid, name, password, balance)
+        sql = "INSERT INTO Accounts (uID, name, password, email) VALUES (%s, %s, %s, %s)"
+        val = (uID, name, password, email)
         mycur.execute(sql, val)
         myconn.commit()
         print("Account Created Successfully!!")
     else:
         print("Account already Exists")
 
-def disp_acc():
+def Login_acc():
     uid = int(input("Enter Unique ID Assigned: "))
     mycur.execute("SELECT * FROM Accounts WHERE uid=%s", (uid,))
     account = mycur.fetchone()
@@ -42,10 +29,8 @@ def disp_acc():
     if account is not None:
         password = int(input("Enter Your Password: "))
         if account[2] == password:
-            print(f"Your Current Balance is: {account[3]}")
+            print(f"You Have Been Registered: {account[1]}")
         else:
             print("Wrong Password")
     else:
         print("Account does not exist")
-
-        print("Enter a valid choice (1-5)")
