@@ -5,10 +5,10 @@ myconn = c.connect(host="localhost", user="root", password="1234")
 mycur = myconn.cursor()
 
 # Create the database if it doesn't exist
-mycur.execute("CREATE DATABASE IF NOT EXISTS Userlogin_sys")
+mycur.execute("CREATE DATABASE IF NOT EXISTS Prod_Reccomend_Sys")
 
 # Connect to Database now after Database has been created
-myconn = c.connect(host="localhost", user="root", password="1234", database="User login_sys")
+myconn = c.connect(host="localhost", user="root", password="1234", database="Prod_Reccomend_Sys")
 mycur = myconn.cursor()
 
 # Create User Login table
