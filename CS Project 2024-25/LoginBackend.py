@@ -13,7 +13,7 @@ def Register_acc():
         Password = int(input("Create Password: "))
         Email_ID = int(input("Enter Your Email ID: "))
         Contact_No= int(input("Enter Your Contact No: "))
-        sql = "INSERT INTO Userlogin_sys(uID, Name, Password, Email_ID,Contact_No) VALUES (%s, %s, %s, %s,%s)"
+        sql = "INSERT INTO UserLogin(uID, Name, Password, Email_ID,Contact_No) VALUES (%s, %s, %s, %s,%s)"
         val = (uID, Name, Password, Email_ID,Contact_No)
         mycur.execute(sql, val)
         myconn.commit()
@@ -23,7 +23,7 @@ def Register_acc():
 
 def Login_acc():
     uid = int(input("Enter Unique ID Assigned: "))
-    mycur.execute("SELECT * FROM User_login WHERE uID=%s", (uID,))
+    mycur.execute("SELECT * FROM User_Login WHERE uID=%s", (uID,))
     account = mycur.fetchone()
     
     if account is not None:
