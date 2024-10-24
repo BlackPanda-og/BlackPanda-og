@@ -12,9 +12,9 @@ def Register_acc():
         name = input("Enter Your Name: ")
         password = int(input("Create Password: "))
         email = int(input("Enter Your Email ID: "))
-        
-        sql = "INSERT INTO Accounts (uID, name, password, email) VALUES (%s, %s, %s, %s)"
-        val = (uID, name, password, email)
+        contact= int(input("Enter Your Contact No: "))
+        sql = "INSERT INTO Userlogins_sys(uID, name, password, email,contact) VALUES (%s, %s, %s, %s,%s)"
+        val = (uID, name, password, email,contact)
         mycur.execute(sql, val)
         myconn.commit()
         print("Account Created Successfully!!")
