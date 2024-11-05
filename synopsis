@@ -1,0 +1,81 @@
+										Synopsis
+
+Project Title:- Product Recommendation Engine
+
+Introduction :- This project Introduces a User Preference Driven Product Recommendation Engine Which is Capable of Generating Recommendations For Digital Entertainment Products Like Movies, Web Series, Books, Music, Anime. It Uses Machine Learning Model KNN( K - Nearest Neighbor)  Which Upon Receiving User Input Uses API Integration to search For Relevant information On Internet And Generate Response Based On Majority Of Responses From Internet. Future Updates On the Project would be Able To Recommend Products from E-commerce Websites Based On Various Parameters Like Budget, Availability, Quality, Feedback over Internet etc. 
+
+Objective:- In the Days Of Overflowing Information On Internet, Where One Might Get Confused Which Type of Digital Entertainment Products are Suitable for them this Projects Aims To Provide solution by
+
+1).  Developing a user-friendly platform for Content recommendations. 
+
+2). To implement a machine learning model that learns user preferences. 
+
+3). To integrate SQL for efficient data management and retrieval. 
+
+4). To continuously refine recommendations based on user feedback.
+
+Algorithm :-
+1).  After Landing On Front Page User will be Asked to Register an Account on our Platform Or Login In.
+
+2). Upon storing Above User Information In Database User Will Be Given Input Prompt For Typing Which of the Following Services From 1). Movie 2). Web Series 3). Books 4). Music 5). Anime Would They like To Consume.
+
+3).  Upon Entering Above Product of their Choice User would Be asked to Enter Title, Genre And Description Of the Product.
+
+4). After User Input Is Taken Data Modification Would take Place to deal with Null Values, Also Converting Their Responses into Numbers using Techniques such as One Hot Encoding And TF-IDF( Term Frequency - Inverse Document Frequency) as It Would Be easier For ML Model to deal with Numbers 
+
+5). After Gathering User Response API’s Used In the Project would Be Able To Extract For The Relevant Information  From Various Websites that is to be Provided To ML Model
+ 6). Upon Receiving Data From Internet Our KNN Model Would Analyze the Information and Generate Recommendations  Based on Majority/ Most Frequently Recommended Product. Here  K Represents Number of Nearest Neighbor Data Points Whose Majority Will Decide The Recommendation
+
+7). After User Is Provided With Output Feedback System Will Be Used To Ask User For Ratings out of 10 and Their Descriptive Opinion About the Product Recommendation that will be Further used to Improve the ML Model.
+
+Strengths of Our Platform:-
+
+1). This Model Works With a Effectively simple ML Model which Recommends Future Datapoints  based on Majority Value of input Datapoints.
+
+2). User Interface and functions of website is simple and easy to operate for any type of user.
+
+3).  The recommendation system can be scaled to accommodate a growing user base and expanding content library, making it suitable for large platforms.
+
+Weaknesses of Our Platform:- ‘
+
+1). New users or items may not have enough data for accurate recommendations, leading to Irrelevant  suggestions until sufficient data is collected.
+
+2). The effectiveness of the recommendation system heavily relies on the quality and quantity of data. Incomplete or biased data can lead to poor recommendations.
+
+3). KNN Model can become computationally expensive as the dataset grows, leading to slower response times for recommendations.
+
+Key Features:- 
+1). Integrating with third-party APIs (e.g., movie databases, music services) to enrich content offerings and provide additional information.
+
+2). Send notifications to users about new releases, personalized recommendations, or updates to their favorite content. 
+
+3). Allow for the continuous improvement of recommendation algorithm through model retraining based on user Reviews.
+
+4).  Provide tailored content suggestions based on user behavior, preferences, and interactions with the platform.
+
+Future Updates:- 
+
+Future Updates Of the Platform Will Include a Better ML Algorithm, Pre Suggested Content for New User Making It easy To Navigate for them and Also Generate Relevant Responses.  It will also Expand to Product Recommendation  from e-commerce Websites Extracting Information About Most Suitable Product from Internet Based On User’s Requirements. Implementing content ratings and parental control features to help users filter content based on age appropriateness.
+
+Tables Used In mySQL Backend:-
+1). User Login Table :- This Table Stores The Details which stores User information that includes uID (Unique for every user),  Name, email ID , Password. 
+
+2). Content Table:- After Receiving Input From User This Table Stores all the extracted information through Many Websites on Internet using API’s and stores it which is further given to ML Model. This Table Includes  Content ID ( Primary Key for the Table), Title, Type( movie, web series etc.), Genre, Description.
+
+3). Recommendations Table:- Table that stores Prediction Generated By ML Model. This Table Includes Recommendation ID ( primary key for the table), uID (foreign Key for future use), Content ID ( Foreign Key for future use), Score, Description.
+
+4). User Reviews Table:-Table that Stores user response after Recommendation has been generated. This table includes  Review ID ( primary key for the table), uID ( Foreign Key), Content ID ( Foreign Key), Ratings, Comments.
+
+Other Resources used:- 
+
+1). Sci-kit Learn:- Python Library Used for Building ML Model
+
+2).Pandas:- Python Library Used For Reading and Loading Data from sql and Other data Manipulations like Representing text data in string format.
+
+3).Numpy: - Python Library used for Operations Like Matrix Multiplication and Dealing With Multivariable data.
+
+4).Flask:- Python Web Development Framework used for Connecting Front-end Web Page with Backend Python and sql.
+
+5). react.js and html:- Web development frameworks used for Creating Working Front-end Website.
+
+API’s used for Data Collection:-  
