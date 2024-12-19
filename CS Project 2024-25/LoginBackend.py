@@ -1,15 +1,9 @@
-from flask import Flask, request, jsonify
-from flask_cors import CORS
 import mysql.connector as c
-
-app = Flask(__name__)
-CORS(app)
 
 # Database connection
 myconn = c.connect(host="localhost", user="root", password="1234", database="Prod_Reccomend_Sys")
 mycur = myconn.cursor()
 
-@app.route('/register', methods=['POST'])
 def register_acc():
     try:
         data = request.json
@@ -27,13 +21,12 @@ def register_acc():
             val = (uID, Name, Password, Email_ID, Contact_No)
             mycur.execute(sql, val)
             myconn.commit()
-            return jsonify({"message": "Account Created Successfully!"}), 201
+            return ({"message": "Account Created Successfully!"}), 201
         else:
-            return jsonify({"message": "Account already exists"}), 400
+            return ({"message": "Account already exists"})
     except Exception as e:
-        return jsonify({"message": f"An error occurred: {str(e)}"}), 500
+        return ({"message": f"An error occurred: {str(e)}"})
 
-@app.route('/login', methods=['POST'])
 def login_acc():
     try:
         data = request.json
@@ -45,13 +38,11 @@ def login_acc():
 
         if account is not None:
             if account[2] == Password:  # Assuming Password is the third column
-                return jsonify({"message": f"You Have Been Logged In: {account[1]}"}), 200
+                return ({"message": f"You Have Been Logged In: {account[1]}"}) 
             else:
-                return jsonify({"message": "Wrong Password"}), 401
+                return ({"message": "Wrong Password"})
         else:
-            return jsonify({"message": "Account does not exist"}), 404
+            return ({"message": "Account does not exist"})
     except Exception as e:
-        return jsonify({"message": f"An error occurred: {str(e)}"}), 500
+        return ({"message": f"An error occurred: {str(e)}"})
 
-if __name__ == '__main__':
-    app.run(debug=True)
