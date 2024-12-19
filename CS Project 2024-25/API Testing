@@ -1,0 +1,63 @@
+import mysql.connector as c
+import requests
+
+# Function to establish a connection to the MySQL database
+def create_connection():
+    return c.connect(host="localhost", user="root", password="1234", database="Prod_Reccomend_Sys")
+
+# Function to fetch anime data from Jikan API
+def fetch_anime_data(anime_id):
+    url = f'https://api.jikan.moe/v4/anime/{anime_id}/recommendations'
+    response = requests.get(url)
+    
+    if response.status_code == 200:
+        return response.json()
+    else:
+        print(f"Error fetching data: {response.status_code}")
+        return None
+
+# Function to store recommendations in the ML_RECCOMENDATION table
+def store_recommendations(recommendations, user_id):
+    try:
+        connection = create_connection()
+        cursor = connection.cursor()
+        
+        for rec in recommendations:
+            content_id = rec['mal_id']  # Assuming 'mal_id' is the ID used in Content_Store
+            title = rec['title']
+            score = rec.get('score', 0)  # Default score to 0 if not available
+            description = rec.get('synopsis', '')  # Default to empty if not available
+            
+            # Insert into ML_RECCOMENDATION table
+            cursor.execute('''
+            INSERT INTO ML_RECCOMENDATION (uID, ContentID, Score, Description)
+            VALUES (%s, %s, %s, %s)
+            ''', (user_id, content_id, score, description))
+        
+        connection.commit()
+        print("Recommendations stored successfully.")
+    
+    except c.Error as e:
+        print(f"Error: {e}")
+    
+    finally:
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+
+# Main function to execute the workflow
+def main(anime_id, user_id):
+    # Fetch anime recommendations
+    data = fetch_anime_data(anime_id)
+    
+    if data and 'data' in data:
+        recommendations = data['data']
+        store_recommendations(recommendations, user_id)
+    else:
+        print("No recommendations found.")
+
+# Example usage
+if __name__ == "__main__":
+    anime_id = 1  # Replace with the desired anime ID
+    user_id = 1   # Replace with the user ID for whom recommendations are being stored
+    main(anime_id, user_id)
