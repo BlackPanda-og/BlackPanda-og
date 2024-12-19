@@ -6,7 +6,6 @@ mycur = myconn.cursor()
 
 def register_acc():
     try:
-        data = request.json
         uID = int(data.get('uID'))
         Name = data.get('Name')
         Password = data.get('Password')
