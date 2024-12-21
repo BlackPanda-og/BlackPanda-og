@@ -1,0 +1,58 @@
+import requests
+import mysql.connector as c
+
+def create_connection():
+    """Establish a connection to the MySQL database."""
+    return c.connect(host="localhost", user="root", password="1234", database="Prod_Reccomend_Sys")
+
+def insert_book_to_db(book):
+    """Insert book data into the database."""
+    conn = create_connection()
+    cursor = conn.cursor()
+    insert_query = """
+    INSERT INTO Content_Store (title, author, year, genre, description, url, imglink)
+    VALUES (%s, %s, %s, %s, %s, %s, %s)
+    """
+    cursor.execute(insert_query, (book['title'], book['author'], book['year'], book['genre'], book['description'], book['url'], book['imglink']))
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+def fetch_books_from_openlibrary(genre, description, max_results=5):
+    """Fetch books from OpenLibrary based on genre and description."""
+    query = f"{genre} {description}".strip()
+    url = f"https://openlibrary.org/search.json?q={query}"
+
+    response = requests.get(url)
+    if response.status_code == 200:
+        data = response.json()
+        books = data.get('docs', [])
+        
+        for book in books[:max_results]:
+            languages = book.get('language', [])
+            if 'eng' in languages:
+                title = book.get('title', "Unknown Title")
+                author = ', '.join(book.get('author_name', ["Unknown Author"]))
+                year = book.get('first_publish_year', 'Unknown')
+                book_url = f"https://openlibrary.org{book.get('key', '')}" if book.get('key') else "URL not available"
+                cover_id = book.get('cover_i', None)
+                imglink = f"https://covers.openlibrary.org/b/id/{cover_id}-M.jpg" if cover_id else "Cover image not available"
+
+                book_data = {
+                    "title": title,
+                    "author": author,
+                    "year": year,
+                    "genre": genre,
+                    "description": description,
+                    "url": book_url,
+                    "imglink": imglink
+                }
+                
+                # Insert book data into the database
+                insert_book_to_db(book_data)
+
+    else:
+        print("Failed to fetch books from OpenLibrary.")
+
+# Example usage
+fetch_books_from_openlibrary("Fiction", "adventure")
