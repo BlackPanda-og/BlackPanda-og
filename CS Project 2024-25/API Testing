@@ -1,9 +1,3 @@
-import mysql.connector as c
-import requests
-
-# Function to establish a connection to the MySQL database
-def create_connection():
-    return c.connect(host="localhost", user="root", password="1234", database="Prod_Reccomend_Sys")
 
 # Function to fetch anime data from Jikan API
 def fetch_anime_data(anime_id):
